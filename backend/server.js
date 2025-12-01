@@ -16,10 +16,7 @@ connectDb();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: [
-      "http://localhost:3000",
-      "https://clothing-ecommerce-flax.vercel.app",
-    ], credentials: true }));
+app.use(cors({ origin: "https://clothing-ecommerce-flax.vercel.app", credentials: true }));
 
 // Registration of User
 app.post("/register/", async (request, response) => {
