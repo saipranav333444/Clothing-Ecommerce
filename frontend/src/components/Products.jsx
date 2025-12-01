@@ -8,7 +8,7 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-  API.get("/products")
+  API.get("/api/products")
     .then((res) => setProducts(res.data))
     .catch((err) => console.log("Error fetching products:", err));
 }, []);
