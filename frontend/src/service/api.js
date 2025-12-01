@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://clothing-ecommerce-flax.vercel.app/",
   withCredentials: true,
 });
