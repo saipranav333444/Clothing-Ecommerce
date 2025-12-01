@@ -8,22 +8,16 @@ export default function Login({ setProducts }) {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      const response = await API.post("/login/", { email, password });
-      const token = response.data.token; // adjust based on your API response
-      console.log(token);
-      if (token) {
-        localStorage.setItem("authToken", token); // or use context/provider
-        alert("Login successful!");
-        navigate("/products");
-      } else {
-        alert("Login failed: no token received");
-      }
-    } catch (err) {
-      console.error(err);
-      navigate("/products");
-    }
-  };
+  try {
+    const res = await API.post("/login/", { email, password });
+    localStorage.setItem("token", res.data.token);
+    alert("Login Successful!");
+    navigate("/products");
+  } catch (err) {
+    navigate('/products')
+    console.log(err);
+  }
+};
 
   return (
     <div style={{ padding: 20 }}>
