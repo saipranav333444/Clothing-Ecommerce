@@ -3,7 +3,7 @@ import { API } from "../service/api";
 import "./Products.css";
 
 const allowedSizes = ["S", "M", "L", "XL"];
-const allCategories = ["clothing", "shoes", "accessories"]; // example categories
+const allCategories = ["Men", "Women", "Kids"]; // example categories
 
 export default function Products() {
   const [products, setProducts] = useState([]);
