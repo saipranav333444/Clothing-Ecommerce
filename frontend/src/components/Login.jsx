@@ -9,16 +9,19 @@ export default function Login({ setProducts }) {
 
   const handleLogin = async () => {
     try {
-      await API.post("/login/", { email, password });
-      alert("Login successful!");
-      // Fetch products after login
-      const res = await API.get("/api/products");
-      console.log(res.data);
-      setProducts(res.data);
-      navigate("/products");
+      const response = await API.post("/login/", { email, password });
+      const token = response.data.token; // adjust based on your API response
+      console.log(token);
+      if (token) {
+        localStorage.setItem("authToken", token); // or use context/provider
+        alert("Login successful!");
+        navigate("/products");
+      } else {
+        alert("Login failed: no token received");
+      }
     } catch (err) {
       console.error(err);
-      alert("Login failed");
+      navigate("/products");
     }
   };
 
@@ -28,14 +31,16 @@ export default function Login({ setProducts }) {
       <input
         type="email"
         placeholder="email"
+        value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <br />
       <input
         type="password"
         placeholder="password"
+        value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+
       <br />
       <button onClick={handleLogin}>Login</button>
     </div>

@@ -72,17 +72,19 @@ app.post("/login/", async (request, response) => {
       { expiresIn: process.env.JWT_EXPIRES_IN || "1d" }
     );
 
-    response.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 24 * 60 * 60 * 1000,
-    });
+    // Optional: still set cookie if you want
+    // response.cookie("token", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    //   sameSite: "strict",
+    //   maxAge: 24 * 60 * 60 * 1000,
+    // });
 
-    console.log("Logged Successful");
+    console.log("Login Successful");
 
     return response.json({
       message: "Login Successful",
+      token: token, // send token in JSON response
     });
   } catch (error) {
     return response.status(500).json({
