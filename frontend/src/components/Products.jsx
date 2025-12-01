@@ -8,18 +8,11 @@ export default function Products() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const res = await API.get("/api/products");
-        console.log(res.data);
-        setProducts(res.data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    }
+  API.get("/products")
+    .then((res) => setProducts(res.data))
+    .catch((err) => console.log("Error fetching products:", err));
+}, []);
 
-    fetchProducts();
-  }, []);
 
   return (
     <div className="products-container">
